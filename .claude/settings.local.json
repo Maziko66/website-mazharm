@@ -54,7 +54,19 @@
       "Bash(node C:/Projects/website-mazharm/gen-music-tab.js)",
       "Bash(node C:/Projects/website-mazharm/color-tags.js)",
       "Bash(del C:Projectswebsite-mazharmcolor-tags.js)",
-      "Bash(Remove-Item C:Projectswebsite-mazharmcolor-tags.js)"
+      "Bash(Remove-Item C:Projectswebsite-mazharmcolor-tags.js)",
+      "WebFetch(domain:itch.io)",
+      "WebFetch(domain:maziko66.itch.io)",
+      "WebFetch(domain:alren54.itch.io)",
+      "WebFetch(domain:soyamilk.itch.io)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1hZ2UvMjY3MzYwOC8xNTk0MjA0Ni5wbmc=/347x500/LmM8%2Fi.png\" -o zeki-ama-calismiyor.png)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1hZ2UvMjQxNTU1Ni8xNDI5NzIwMC5wbmc=/347x500/0VkfrG.png\" -o take-one-shoot.png)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1hZ2UvMjE3MzM4NS8xMjgyNzEwOS5wbmc=/347x500/9Z5vUq.png\" -o ecopixel.png)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1nLzEyMTAyNDY3LnBuZw==/347x500/D%2FsYkg.png\" -o ukde.png)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1hZ2UvMjUwNjk3OC8xNDg5Njg2OS5qcGVn/347x500/JFeG3P.jpeg\" -o the-descendant.jpg)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1hZ2UvMjAwOTU4NC8xMTgxNjc3NC5wbmc=/347x500/%2FR4YvF.png\" -o viral-sansasyon.png)",
+      "Bash(curl -sL \"https://img.itch.zone/aW1hZ2UvMTk4NzA2NS8xMTY4NDYxMS5wbmc=/347x500/daiiql.png\" -o as-we-unite-jam.png)",
+      "Bash(ls -lh C:/Projects/website-mazharm/images/games/*.png C:/Projects/website-mazharm/images/games/the-descendant.jpg C:/Projects/website-mazharm/images/games/as-we-unite-jam.png)"
     ]
   }
 }
