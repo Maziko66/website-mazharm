@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~* Welcome To My Homepage *~ Game Designer · Programmer · Composer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #1a2e1a;
+  --bg-panel: #0f1a0f;
+  --border-light: #7bc47b;
+  --border-dark: #2d4a2d;
+  --text: #a8e6a8;
+  --text-alt: #f0e68c;
+  --text-white: #d4dfd4;
+  --link: #88d4aa;
+  --link-hover: #f4b8d4;
+  --accent: #e8b860;
+  --hot-pink: #f4b8d4;
+  --cyan: #8cd8c0;
+  --terminal: 'VT323', monospace;
+  --pixel: 'Press Start 2P', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--terminal);
+  font-size: 18px;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(120,200,120,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+}
+
+::selection { background: var(--hot-pink); color: #1a2e1a; }
+a { color: var(--link); text-decoration: underline; transition: color 0.1s; }
+a:hover { color: var(--link-hover); }
+
+.site-wrapper { max-width: 800px; margin: 0 auto; padding: 0 1rem; }
+
+.top-bar {
+  border-bottom: 3px double var(--border-light);
+  padding: 0.75rem 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+}
+.top-bar a { font-family: var(--terminal); font-size: 1rem; color: var(--cyan); margin: 0 0.4rem; text-decoration: none; letter-spacing: 1px; }
+.top-bar a:hover { color: var(--text-alt); text-decoration: underline; }
+.top-bar .sep { color: var(--border-light); user-select: none; }
+
+.marquee-bar {
+  background: #0a150a;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding: 0.35rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-content {
+  display: inline-block;
+  animation: marquee 18s linear infinite;
+  font-family: var(--terminal);
+  font-size: 1rem;
+  color: var(--text-alt);
+  letter-spacing: 2px;
+}
+@keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+
+.hr-stars { text-align: center; border: none; color: var(--text-alt); font-size: 0.9rem; margin: 2rem 0; letter-spacing: 4px; }
+.hr-stars::before { content: '·═══════════════════════════════·'; color: var(--border-light); }
+
+.section-header {
+  font-family: var(--pixel);
+  font-size: 0.85rem;
+  color: var(--cyan);
+  text-align: center;
+  margin-bottom: 1.25rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.6), 0 0 8px rgba(140,216,192,0.2);
+  padding: 0.5rem;
+  border: 1px dashed var(--border-light);
+}
+.section-header span { color: var(--text-alt); }
+
+.hero { text-align: center; padding: 3rem 0 1rem; }
+.hero-title {
+  font-family: var(--pixel);
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  color: var(--text-alt);
+  text-shadow: 2px 2px 0 #5a8a5a, -1px -1px 0 var(--hot-pink);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+.hero-subtitle { font-family: var(--terminal); font-size: 1.2rem; color: var(--text); margin-bottom: 1.5rem; }
+
+.hero-content { display: flex; gap: 1.5rem; align-items: flex-start; text-align: left; margin-top: 1.5rem; }
+
+.photo-box { flex-shrink: 0; width: 180px; }
+.photo-frame {
+  width: 180px; height: 220px;
+  border: 3px outset #6a9a6a;
+  background: #0f1a0f;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.photo-placeholder { color: var(--border-light); font-size: 0.85rem; text-align: center; padding: 0.5rem; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.photo-caption { font-size: 0.75rem; color: var(--text-alt); text-align: center; margin-top: 0.35rem; }
+
+.hero-desc { font-size: 1.1rem; color: var(--text-white); line-height: 1.7; }
+
+.role-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.role-badge { font-family: var(--terminal); font-size: 0.9rem; padding: 0.2rem 0.6rem; border: 2px outset; display: inline-block; }
+.role-badge.designer { color: #1a2e1a; background: var(--cyan); border-color: #6aaa8a; }
+.role-badge.programmer { color: #1a2e1a; background: var(--hot-pink); border-color: #c48aaa; }
+.role-badge.composer { color: #1a2e1a; background: var(--text-alt); border-color: #b0b46a; }
+
+.panel { border: 2px inset #4a6a4a; background: rgba(0,0,0,0.35); padding: 1.25rem; margin-bottom: 1rem; }
+
+.edu-entry { margin-bottom: 0.75rem; padding-left: 1rem; border-left: 2px solid var(--border-light); }
+.edu-entry .year { color: var(--accent); font-size: 0.95rem; }
+.edu-entry .school { color: var(--cyan); font-size: 1.05rem; }
+.edu-entry .desc { color: var(--text-white); font-size: 0.95rem; }
+
+.tab-bar { display: flex; flex-wrap: wrap; gap: 0; }
+.tab-btn {
+  font-family: var(--terminal); font-size: 1rem;
+  padding: 0.4rem 0.9rem;
+  border: 2px outset #6a9a6a; background: #2a3e2a; color: var(--text-white); cursor: pointer;
+}
+.tab-btn:hover { background: #3a5a3a; color: #fff; }
+.tab-btn.active { background: var(--bg-panel); color: var(--text); border-style: inset; font-weight: bold; }
+
+.tab-panel { display: none; border: 2px inset #4a6a4a; background: var(--bg-panel); padding: 1.25rem; }
+.tab-panel.active { display: block; }
+
+.sub-header { font-family: var(--terminal); font-size: 1.1rem; color: var(--accent); margin: 1.25rem 0 0.75rem; letter-spacing: 1px; }
+.sub-header:first-child { margin-top: 0; }
+.sub-header::before { content: '>> '; color: var(--border-light); }
+
+.project-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.project-entry {
+  border: 1px solid var(--border-dark); padding: 0.85rem; background: rgba(0,0,0,0.3);
+  display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.15s;
+}
+.project-entry:hover { border-color: var(--text); }
+.project-thumb-sm {
+  width: 100px; height: 70px; border: 2px outset #4a6a4a; background: #0a150a;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 0.65rem; color: var(--border-light);
+}
+.project-thumb-sm img { width: 100%; height: 100%; object-fit: cover; }
+.project-info h4 { font-family: var(--terminal); font-size: 1.05rem; color: var(--text-alt); margin-bottom: 0.15rem; }
+.project-info p { font-size: 0.9rem; color: var(--text-white); margin-bottom: 0.3rem; }
+.project-tags-row { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.tag-sm { font-size: 0.75rem; padding: 0.1rem 0.4rem; background: rgba(120,200,120,0.08); border: 1px solid var(--border-dark); color: var(--text); }
+
+.music-entry {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.5rem 0.65rem; border: 1px solid var(--border-dark);
+  background: rgba(0,0,0,0.2); margin-bottom: 0.4rem; transition: border-color 0.15s;
+}
+.music-entry:hover { border-color: var(--text-alt); }
+.music-play {
+  width: 28px; height: 28px; border: 2px outset #6a9a6a; background: #2a3e2a;
+  color: var(--text); display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; flex-shrink: 0; cursor: pointer;
+}
+.music-entry h4 { font-size: 0.95rem; color: var(--text-alt); }
+.music-entry .music-meta { font-size: 0.8rem; color: var(--text-white); }
+
+.research-entry { border: 1px solid var(--border-dark); padding: 0.85rem; background: rgba(0,0,0,0.3); margin-bottom: 0.5rem; }
+.research-entry h4 { color: var(--cyan); font-size: 1rem; margin-bottom: 0.25rem; }
+.research-entry p { color: var(--text-white); font-size: 0.9rem; }
+
+.cv-panel { text-align: center; padding: 1.5rem; }
+.cv-panel p { color: var(--text-white); margin-bottom: 1rem; font-size: 0.95rem; }
+.btn-90s {
+  font-family: var(--terminal); font-size: 1.1rem; padding: 0.5rem 1.5rem;
+  border: 3px outset #6a9a6a; background: linear-gradient(180deg, #3a5a3a 0%, #1a2e1a 100%);
+  color: var(--text); cursor: pointer; text-decoration: none; display: inline-block; letter-spacing: 1px;
+}
+.btn-90s:hover { border-style: inset; background: linear-gradient(180deg, #2a4a2a 0%, #0f1a0f 100%); color: var(--text-alt); }
+
+.links-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; }
+.link-entry {
+  border: 2px outset #4a6a4a; background: #1a2a1a; padding: 0.65rem 0.85rem;
+  display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-white);
+}
+.link-entry:hover { background: #2a3e2a; border-style: inset; color: var(--text-alt); opacity: 1; }
+.link-entry .link-ico { font-size: 1.1rem; width: 24px; text-align: center; }
+.link-entry .link-name { font-size: 0.95rem; color: var(--link); }
+
+.footer-90s {
+  text-align: center; padding: 1.5rem 0; border-top: 3px double var(--border-light);
+  margin-top: 2rem; font-size: 0.85rem; color: var(--text-white);
+}
+.footer-90s .counter {
+  display: inline-block; border: 2px inset #4a6a4a; background: #0a0f0a;
+  padding: 0.15rem 0.6rem; font-family: var(--pixel); font-size: 0.55rem;
+  color: var(--text); margin: 0.5rem 0; letter-spacing: 2px;
+}
+.blink { animation: blink90 1s step-end infinite; }
+@keyframes blink90 { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.construction { font-family: var(--pixel); font-size: 0.6rem; color: var(--text-alt); text-align: center; margin: 0.5rem 0; letter-spacing: 1px; }
+.ascii-art { font-family: var(--terminal); font-size: 0.7rem; color: var(--border-light); text-align: center; line-height: 1.2; white-space: pre; margin: 0.5rem 0; opacity: 0.6; }
+
+@media (max-width: 640px) {
+  .hero-content { flex-direction: column; align-items: center; text-align: center; }
+  .role-badges { justify-content: center; }
+  .project-entry { flex-direction: column; }
+  .project-thumb-sm { width: 100%; height: 100px; }
+  .links-list { grid-template-columns: 1fr; }
+  .tab-btn { font-size: 0.85rem; padding: 0.3rem 0.6rem; }
+  .hero-title { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="marquee-bar">
+  <div class="marquee-content">★ ★ ★ WELCOME TO MY HOMEPAGE IN THE INTERWEBS ——— I MAKE GAMES ——— BEST VIEWED AT 800x600 ★ ★ ★</div>
+</div>
+
+<div class="top-bar">
+  <a href="#about">[ABOUT]</a><span class="sep">|</span>
+  <a href="#education">[EDUCATION]</a><span class="sep">|</span>
+  <a href="#portfolio">[PORTFOLIO]</a><span class="sep">|</span>
+  <a href="#links">[LINKS]</a>
+</div>
+
+<div class="site-wrapper">
+
+<section class="hero" id="about">
+  <div class="ascii-art">
+   ___  ___  ___  ___  ___  ___  _    _  ___
+  | . \| . || . ||  _||  _|| . || |  |_|| . |
+  |  _/| | ||   || |_ | |_ | | || |_ | || | |
+  |_|  `___'|_|_||___||_| |`___'|___||_|`___'
+  </div>
+  <div class="section-header">[ <span>ABOUT</span> ]</div>
+  <h1 class="hero-title">~* Mazhar Mustafaoğlu *~</h1>
+  <p class="hero-subtitle">&gt; Game Designer // Programmer // Composer _<span class="blink">|</span></p>
+  <div class="hero-content">
+    <div class="photo-box">
+      <div class="photo-frame">
+        <!-- Replace src with your photo path, e.g. src="images/profile_pic.jpg" -->
+        <img src="images/profile_pic.jpg" alt="Profile Picture">
+      </div>
+      <div class="photo-caption">^ that's me ^</div>
+    </div>
+    <div>
+      <p class="hero-desc">Game Designer and Musician with an Engineering background. I design game systems, write the code that runs them, and compose the music you hear while playing. Currently working as Game Designer &amp; Composer at Rogue Duck Interactive, Composer &amp; SFX Artist at Last Minute Studios, and freelance Composer at Hamlet Games. Worldbuilder, horror enthusiast.</p>
+    </div>
+  </div>
+</section>
+
+<div class="hr-stars"></div>
+
+<section id="education">
+  <div class="section-header">[ <span>EDUCATION & WORK</span> ]</div>
+  <div class="panel">
+    <div class="edu-entry">
+      <div class="year">&gt; B.Sc. Mathematical Engineering — Yıldız Technical University, İstanbul (2018 — 2024)</div>
+      <div class="desc">Trained as an engineer with deep mathematical foundations — producing solutions by modelling and simulating technical, economic, and social phenomena. Submitted and was accepted for a TÜBİTAK research project: "Learning Reading and Writing with Games."</div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="edu-entry" style="margin-bottom: 0.75rem;">
+      <div class="year">&gt; Rogue Duck Interactive — Game Designer, Composer, occasional Programmer (Current)</div>
+      <div class="desc">
+        · <span class="school">As We Unite</span> — Creator<br>
+        · <span class="school">Nothing To Declare</span> — Producer, Game Designer, Soundtrack<br>
+        · <span class="school">Replay Value: Second Hand Games</span> — Producer, Soundtrack, SFX<br>
+        · <span class="school">Lost But Found</span> — Game Designer, Developer, Soundtrack<br>
+        · <span class="school">Ship, Inc.</span> — Game Designer, Soundtrack, SFX<br>
+        · <span class="school">Cozy Organizer</span> — Game Design, Writer, Soundtrack, SFX<br>
+        · <span class="school">Recycling Shift</span> — Game Design, Soundtrack<br>
+        · <span class="school">Clonizer</span> — Soundtrack (Kristal Piksel 2025 — Best Soundtrack Nominee)<br>
+        · <span class="school">Kingdom's Deck</span> — Soundtrack, SFX<br>
+        · <span class="school">Vending Machine Co.</span> — Soundtrack<br>
+        · <span class="school">Rentlord</span> — Soundtrack, SFX
+      </div>
+    </div>
+    <div class="edu-entry" style="margin-bottom: 0.75rem;">
+      <div class="year">&gt; Last Minute Studios — Composer, SFX Artist (Current)</div>
+      <div class="desc">
+        · <span class="school">Penny for Your Potion</span> — Soundtrack, SFX<br>
+        · <span class="school">Mystopia</span> — Soundtrack, UI Elements, Soundtrack Engine, SFX
+      </div>
+    </div>
+    <div class="edu-entry">
+      <div class="year">&gt; Hamlet Games — Freelance Composer (Emberbane)</div>
+    </div>
+  </div>
+</section>
+
+<div class="hr-stars"></div>
+
+<section id="portfolio">
+  <div class="section-header">[ <span>PORTFOLIO</span> ]</div>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="games">VIDEO GAMES</button>
+    <button class="tab-btn" data-tab="cardgame">CARD GAME</button>
+    <button class="tab-btn" data-tab="music">MUSIC</button>
+    <button class="tab-btn" data-tab="research">RESEARCH</button>
+    <button class="tab-btn" data-tab="cv">CV</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-games">
+    <div class="sub-header">Personal Projects</div>
+    <div class="project-list">
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Project Name</h4>
+          <p>Brief description of the game, your role, and what makes it interesting.</p>
+          <div class="project-tags-row"><span class="tag-sm">Unity</span><span class="tag-sm">C#</span><span class="tag-sm">Design</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-header">Game Jams</div>
+    <div class="project-list">
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Jam Project Name</h4>
+          <p>Which jam, theme, duration, and what you built.</p>
+          <div class="project-tags-row"><span class="tag-sm">Game Jam</span><span class="tag-sm">48h</span><span class="tag-sm">Godot</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-header">With Rogue Duck Interactive</div>
+    <div class="project-list">
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>As We Unite</h4>
+          <p>Creator. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Creator</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Nothing To Declare</h4>
+          <p>Oversaw production, worked as game designer. Soundtrack credits. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Producer</span><span class="tag-sm">Game Design</span><span class="tag-sm">Soundtrack</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Replay Value: Second Hand Games</h4>
+          <p>Producer. Soundtrack and SFX credits. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Producer</span><span class="tag-sm">Soundtrack</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Lost But Found</h4>
+          <p>Worked as the game designer, developer and composed the soundtrack. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Game Design</span><span class="tag-sm">Developer</span><span class="tag-sm">Soundtrack</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Ship, Inc.</h4>
+          <p>Game Designer. Soundtrack and SFX credits. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Game Design</span><span class="tag-sm">Soundtrack</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Cozy Organizer</h4>
+          <p>Game Design, Writer. Soundtrack and SFX credits. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Game Design</span><span class="tag-sm">Writer</span><span class="tag-sm">Soundtrack</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Recycling Shift</h4>
+          <p>Game Design. Soundtrack credits. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Game Design</span><span class="tag-sm">Soundtrack</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Clonizer</h4>
+          <p>Composed the soundtrack. Kristal Piksel 2025 — Best Soundtrack Nominee. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Soundtrack</span><span class="tag-sm">Award Nominee</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Kingdom's Deck</h4>
+          <p>Composed the soundtrack, created SFX. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Soundtrack</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Vending Machine Co.</h4>
+          <p>Composed the soundtrack. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Soundtrack</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Rentlord</h4>
+          <p>Composed the soundtrack, created SFX. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Soundtrack</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-header">With Last Minute Studios</div>
+    <div class="project-list">
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Penny for Your Potion</h4>
+          <p>Composed the soundtrack, created SFX. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Soundtrack</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Mystopia</h4>
+          <p>Composed the soundtrack, created UI elements, soundtrack engine and SFX. Available on Steam.</p>
+          <div class="project-tags-row"><span class="tag-sm">Soundtrack</span><span class="tag-sm">UI</span><span class="tag-sm">SFX</span><span class="tag-sm">Steam</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-cardgame">
+    <div class="project-list">
+      <div class="project-entry">
+        <div class="project-thumb-sm">[IMG]</div>
+        <div class="project-info">
+          <h4>Card Game Title</h4>
+          <p>Description of your card game — mechanics, theme, current status.</p>
+          <div class="project-tags-row"><span class="tag-sm">Tabletop</span><span class="tag-sm">Game Design</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-music">
+    <div class="sub-header">Personal Music</div>
+    <div>
+      <div class="music-entry"><div class="music-play">▶</div><div><h4>Track Title</h4><div class="music-meta">Genre · 2024</div></div></div>
+      <div class="music-entry"><div class="music-play">▶</div><div><h4>Track Title</h4><div class="music-meta">Genre · 2024</div></div></div>
+    </div>
+    <div class="sub-header">With Rogue Duck Interactive</div>
+    <div>
+      <div class="music-entry"><div class="music-play">▶</div><div><h4>Soundtrack Name</h4><div class="music-meta">Game OST · Composer</div></div></div>
+    </div>
+    <div class="sub-header">With Last Minute Studios</div>
+    <div>
+      <div class="music-entry"><div class="music-play">▶</div><div><h4>Soundtrack Name</h4><div class="music-meta">Game OST · Composer</div></div></div>
+    </div>
+    <div class="sub-header">With Hamlet Games</div>
+    <div>
+      <div class="music-entry"><div class="music-play">▶</div><div><h4>Soundtrack Name</h4><div class="music-meta">Game OST · Composer</div></div></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-research">
+    <div class="research-entry"><h4>&gt; Research Paper / Topic Title</h4><p>Abstract or summary of your research, methodology, and findings.</p></div>
+    <div class="research-entry"><h4>&gt; Another Research Topic</h4><p>Description of research focus, key questions explored, and outcomes.</p></div>
+  </div>
+
+  <div class="tab-panel" id="tab-cv">
+    <div class="cv-panel">
+      <p>Download my full CV for a detailed overview of my experience, skills, and qualifications.</p>
+      <a href="#" class="btn-90s">[ DOWNLOAD CV.PDF ]</a>
+    </div>
+  </div>
+</section>
+
+<div class="hr-stars"></div>
+
+<section id="links">
+  <div class="section-header">[ <span>LINKS</span> ]</div>
+  <div class="links-list">
+    <a href="https://maziko66.itch.io/" class="link-entry" target="_blank" rel="noopener"><span class="link-ico">🎮</span><span class="link-name">itch.io</span></a>
+    <a href="https://github.com/Maziko66?tab=repositories" class="link-entry" target="_blank" rel="noopener"><span class="link-ico">💻</span><span class="link-name">GitHub</span></a>
+    <a href="https://www.linkedin.com/in/mazharm/" class="link-entry" target="_blank" rel="noopener"><span class="link-ico">🔗</span><span class="link-name">LinkedIn</span></a>
+    <a href="https://open.spotify.com/artist/270EfyPeNre7M7QnfvQoAq" class="link-entry" target="_blank" rel="noopener"><span class="link-ico">🎵</span><span class="link-name">Spotify</span></a>
+    <a href="https://www.youtube.com/@maziko66" class="link-entry" target="_blank" rel="noopener"><span class="link-ico">📺</span><span class="link-name">YouTube</span></a>
+    <a href="/cdn-cgi/l/email-protection#482529322123277e7e082f25292124662b2725" class="link-entry" target="_blank" rel="noopener"><span class="link-ico">📧</span><span class="link-name">Email</span></a>
+  </div>
+</section>
+
+<div class="footer-90s">
+  <div class="construction">🚧 UNDER CONSTRUCTION 🚧</div>
+  <div class="counter">VISITORS: 001337</div><br>
+  &copy; 2026 Mazhar Mustafaoğlu · Best viewed in Netscape Navigator 4.0<br>
+  <span style="font-size:0.75rem; color: var(--border-light);">Made with ♥ and way too much caffeine</span>
+</div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
