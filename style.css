@@ -254,6 +254,30 @@ a:hover { color: var(--link-hover); }
   color: var(--text);
 }
 
+/* ── Tag colour variants ───────────────────────────────────────── */
+.tag-design  { color: var(--cyan);     background: rgba(140,216,192,0.09); border-color: rgba(140,216,192,0.35); }
+.tag-music   { color: var(--hot-pink); background: rgba(244,184,212,0.09); border-color: rgba(244,184,212,0.35); }
+.tag-sfx     { color: var(--accent);   background: rgba(232,184,96,0.09);  border-color: rgba(232,184,96,0.35);  }
+.tag-code    { color: var(--text);     background: rgba(168,230,168,0.09); border-color: rgba(168,230,168,0.35); }
+.tag-produce { color: var(--text-alt); background: rgba(240,230,140,0.09); border-color: rgba(240,230,140,0.35); }
+.tag-write   { color: var(--link);     background: rgba(136,212,170,0.09); border-color: rgba(136,212,170,0.35); }
+.tag-art     { color: #c8a0e0;         background: rgba(200,160,224,0.09); border-color: rgba(200,160,224,0.35); }
+
+/* ── Work game entries (education page) ───────────────────────── */
+.work-games { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.5rem; }
+.work-game  {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-left: 2px solid var(--border-dark);
+}
+.work-game-title  { color: var(--cyan); font-size: 0.875rem; margin-right: 0.1rem; }
+.work-game-steam  { font-size: 0.68rem; color: var(--link); text-decoration: none; white-space: nowrap; margin-right: 0.2rem; }
+.work-game-steam:hover { color: var(--link-hover); text-decoration: underline; }
+.work-game-note   { width: 100%; font-size: 0.7rem; color: var(--text-white); padding-left: 0.1rem; }
+.ost-links { display: inline-flex; gap: 0.5rem; flex-wrap: wrap; margin-left: 0.25rem; }
+.ost-link  { font-size: 0.8rem; color: var(--cyan); text-decoration: none; }
+.ost-link:hover { color: var(--link-hover); text-decoration: underline; }
+
 /* ── Music entries ────────────────────────────────────────────── */
 .music-list { display: flex; flex-direction: column; gap: 0.5rem; }
 
@@ -305,14 +329,16 @@ a:hover { color: var(--link-hover); }
 .tracks-toggle {
   font-family: var(--terminal);
   font-size: 0.68rem;
-  line-height: 1.2;
+  line-height: 1;
+  height: 1.3rem;
   color: var(--cyan);
   background: none;
   border: 1px solid var(--border-dark);
   padding: 0.1rem 0.45rem;
   cursor: pointer;
   margin-top: 0.4rem;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 .tracks-toggle:hover { color: var(--text-alt); border-color: var(--border-light); }
 

@@ -51,7 +51,10 @@
       "Bash(node C:/Projects/website-mazharm/extract-playlists.js)",
       "Bash(node C:/Projects/website-mazharm/extract-playlists2.js)",
       "Bash(node C:/Projects/website-mazharm/match-playlists.js)",
-      "Bash(node C:/Projects/website-mazharm/gen-music-tab.js)"
+      "Bash(node C:/Projects/website-mazharm/gen-music-tab.js)",
+      "Bash(node C:/Projects/website-mazharm/color-tags.js)",
+      "Bash(del C:Projectswebsite-mazharmcolor-tags.js)",
+      "Bash(Remove-Item C:Projectswebsite-mazharmcolor-tags.js)"
     ]
   }
 }
