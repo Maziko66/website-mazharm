@@ -7,6 +7,21 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
+document.querySelectorAll('.game-embed-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const wrap   = document.getElementById(btn.dataset.target);
+    const iframe = wrap.querySelector('iframe');
+    const open   = wrap.classList.toggle('open');
+    if (open) {
+      iframe.src = iframe.dataset.src;
+      btn.textContent = '▼ HIDE GAME';
+    } else {
+      iframe.src = '';
+      btn.textContent = '▶ PLAY IN BROWSER';
+    }
+  });
+});
+
 document.querySelectorAll('.tracks-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
     const list = btn.closest('.music-album').querySelector('.tracks-list');

@@ -453,6 +453,39 @@ a:hover { color: var(--link-hover); }
   text-align: right;
 }
 
+/* ── Game embed ───────────────────────────────────────────────── */
+.game-embed-toggle {
+  font-family: var(--terminal);
+  font-size: 0.68rem;
+  line-height: 1;
+  height: 1.3rem;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--border-dark);
+  padding: 0.1rem 0.45rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.5rem;
+}
+.game-embed-toggle:hover { color: var(--text-alt); border-color: var(--border-light); }
+
+.game-embed-wrap {
+  display: none;
+  border: 1px solid var(--border-dark);
+  border-top: none;
+  background: #0a0806;
+  padding: 0.75rem;
+}
+.game-embed-wrap.open { display: block; }
+.game-embed-wrap iframe {
+  display: block;
+  width: 100%;
+  border: 2px inset #4a3418;
+}
+
 /* ── Research entries ─────────────────────────────────────────── */
 .research-entry { border: 1px solid var(--border-dark); padding: 0.85rem; background: rgba(0,0,0,0.3); margin-bottom: 0.5rem; }
 .research-entry h4 { color: var(--cyan); font-size: 0.95rem; margin-bottom: 0.25rem; }
