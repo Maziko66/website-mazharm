@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&display=swap');
 
 /* ── View Transitions ─────────────────────────────────────────── */
 @view-transition { navigation: auto; }
@@ -26,7 +26,7 @@
   --accent:       #e07820;
   --hot-pink:     #d86048;
   --cyan:         #f0c040;
-  --terminal:     'Share Tech Mono', monospace;
+  --terminal:     'Space Mono', monospace;
   --pixel:        'Press Start 2P', monospace;
 }
 
@@ -83,6 +83,9 @@ a:hover { color: var(--link-hover); }
 }
 .top-bar a:hover  { color: var(--text-alt); text-decoration: underline; }
 .top-bar a.active { color: var(--text-alt); text-decoration: underline; }
+.top-bar a[href="selected-portfolio.html"] { color: var(--hot-pink); }
+.top-bar a[href="selected-portfolio.html"]:hover { color: #f07858; }
+.top-bar a[href="selected-portfolio.html"].active { color: #f07858; }
 .top-bar .sep { color: var(--border-light); user-select: none; }
 
 /* ── Marquee ──────────────────────────────────────────────────── */
