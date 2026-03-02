@@ -289,6 +289,7 @@ a:hover { color: var(--link-hover); }
 .tag-produce { color: var(--text-alt); background: rgba(240,230,140,0.09); border-color: rgba(240,230,140,0.35); }
 .tag-write   { color: var(--link);     background: rgba(224,152,64,0.09);  border-color: rgba(224,152,64,0.35);  }
 .tag-art     { color: #c8a0e0;         background: rgba(200,160,224,0.09); border-color: rgba(200,160,224,0.35); }
+.tag-dev     { color: #f0a030;         background: rgba(240,160,48,0.09);  border-color: rgba(240,160,48,0.45);  }
 
 /* ── Work game entries (education page) ───────────────────────── */
 .work-games { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.5rem; }
