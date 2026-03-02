@@ -634,6 +634,11 @@ a:hover { color: var(--link-hover); }
 .minimap-wrap svg a { cursor: pointer; }
 .minimap-wrap svg a rect { transition: filter 0.15s; }
 .minimap-wrap svg a:hover rect { filter: brightness(1.8) drop-shadow(0 0 3px #f8d060); }
+.minimap-wrap svg text { font-family: var(--pixel); pointer-events: none; }
+.minimap-wrap svg a text { visibility: hidden; }
+.minimap-wrap svg a:hover text { visibility: visible; }
+.minimap-dot-current rect { animation: dot-blink 1.8s step-end infinite; }
+@keyframes dot-blink { 50% { opacity: 0; } }
 
 /* ── Side nav ── */
 .side-nav { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
