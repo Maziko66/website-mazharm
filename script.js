@@ -1,3 +1,12 @@
+// ── Scope view transitions: sidebar frozen, right panel animates ───
+document.querySelector('.left-panel')?.style.setProperty('view-transition-name', 'sidebar');
+document.querySelector('.right-panel')?.style.setProperty('view-transition-name', 'main-content');
+
+// ── Hold page reveal until fonts are loaded (prevents 1-frame font flash) ───
+document.addEventListener('pagereveal', async (e) => {
+  if (e.viewTransition) await document.fonts.ready;
+});
+
 // ── Auto-detect active nav link from current URL ──────────────
 (function() {
   const path = window.location.pathname.split('/').pop() || 'index.html';

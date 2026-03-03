@@ -6,8 +6,17 @@
 @keyframes vt-in  { from { opacity: 0; transform: translateY(8px);  } }
 @keyframes vt-out { to   { opacity: 0; transform: translateY(-8px); } }
 
-::view-transition-old(root) { animation: 140ms ease vt-out; }
-::view-transition-new(root) { animation: 200ms ease vt-in;  }
+/* Root (body bg) snaps instantly — sidebar and right-panel handle themselves */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; }
+
+/* Right panel slides in/out */
+::view-transition-old(main-content) { animation: 140ms ease vt-out; }
+::view-transition-new(main-content) { animation: 200ms ease vt-in;  }
+
+/* Sidebar stays frozen */
+::view-transition-old(sidebar),
+::view-transition-new(sidebar) { animation: none; }
 
 /* ── Reset ────────────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -617,6 +626,7 @@ a:hover { color: var(--link-hover); }
   overflow-y: hidden; background: var(--bg-panel);
   border-right: 2px solid var(--border-dark);
   display: flex; flex-direction: column; z-index: 50;
+  view-transition-name: sidebar;
 }
 .left-panel-top {
   display: flex; flex-direction: column; align-items: center;
@@ -640,6 +650,11 @@ a:hover { color: var(--link-hover); }
 .minimap-wrap svg a:hover text { visibility: visible; }
 .minimap-dot-current rect { animation: dot-blink 1.8s step-end infinite; }
 @keyframes dot-blink { 50% { opacity: 0; } }
+
+/* ── Tower warning lights ── */
+@keyframes tower-blink { 50% { opacity: 0; } }
+.tower-light   { animation: tower-blink 2.6s step-end infinite; }
+.tower-light-2 { animation: tower-blink 2.6s step-end 1.3s infinite; }
 
 /* ── Side nav ── */
 .side-nav { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
