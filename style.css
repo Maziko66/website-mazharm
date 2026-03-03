@@ -11,8 +11,8 @@
 ::view-transition-new(root) { animation: none; }
 
 /* Right panel slides in/out */
-::view-transition-old(main-content) { animation: 140ms ease vt-out; }
-::view-transition-new(main-content) { animation: 200ms ease vt-in;  }
+::view-transition-old(main-content) { animation: 140ms ease vt-out forwards; }
+::view-transition-new(main-content) { animation: 200ms ease vt-in  backwards; }
 
 /* Sidebar stays frozen */
 ::view-transition-old(sidebar),
