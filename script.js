@@ -2,10 +2,20 @@
 document.querySelector('.left-panel')?.style.setProperty('view-transition-name', 'sidebar');
 document.querySelector('.right-panel')?.style.setProperty('view-transition-name', 'main-content');
 
-// ── Hold page reveal until fonts are loaded (prevents 1-frame font flash) ───
+// ── Sync line animation with view transition ──────────────────
+let _resolveAnimReady;
+const _animReady = new Promise(r => { _resolveAnimReady = r; });
+
 document.addEventListener('pagereveal', async (e) => {
-  if (e.viewTransition) await document.fonts.ready;
+  if (e.viewTransition) {
+    await document.fonts.ready;
+    await e.viewTransition.finished;
+  }
+  _resolveAnimReady();
 });
+
+// Fallback for browsers without pagereveal support (window.load fires after pagereveal)
+window.addEventListener('load', () => _resolveAnimReady(), { once: true });
 
 // ── Auto-detect active nav link from current URL ──────────────
 (function() {
@@ -16,7 +26,9 @@ document.addEventListener('pagereveal', async (e) => {
 })();
 
 // ── L/Z-path title bar animation ─────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await _animReady;
+
   const activeLink   = document.querySelector('.side-nav a.active');
   const titleLine    = document.querySelector('.page-title-line');
   const titleText    = document.querySelector('.page-title-text');
@@ -66,15 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Undraw an element by shrinking from start-point toward end-point.
-  // Web Animations API: explicit keyframes avoid any forwards-fill conflict.
   function undrawEl(el, type, startDelay) {
     setTimeout(() => {
-      el.style.animation       = 'none';
       el.style.transformOrigin = type === 'horiz' ? 'right center' : 'top center';
-      const from = type === 'horiz' ? 'scaleX(1)' : 'scaleY(1)';
-      const to   = type === 'horiz' ? 'scaleX(0)' : 'scaleY(0)';
       const anim = el.animate(
-        [{ transform: from }, { transform: to }],
+        [{ transform: type === 'horiz' ? 'scaleX(1)' : 'scaleY(1)' },
+         { transform: type === 'horiz' ? 'scaleX(0)' : 'scaleY(0)' }],
         { duration: UNDRAW_DUR, easing: 'ease-in', fill: 'forwards' }
       );
       anim.onfinish = () => el.parentNode?.removeChild(el);
@@ -98,7 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
     bridge.style.height          = '2px';
     bridge.style.transformOrigin = 'left center';
     bridge.style.transform       = 'scaleX(0)';
-    bridge.style.animation       = `line-draw ${BRIDGE_DUR}ms ease-out forwards`;
+    bridge.animate(
+      [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+      { duration: BRIDGE_DUR, easing: 'ease-out', fill: 'forwards' }
+    );
 
     // 2. Vertical: at panel left edge, from button centre Y going UP to title Y
     const vert = mkLine();
@@ -108,7 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
     vert.style.height          = (Math.round(vertH) + 1) + 'px';
     vert.style.transformOrigin = 'bottom center';
     vert.style.transform       = 'scaleY(0)';
-    vert.style.animation       = `vert-draw ${VERT_DUR}ms ease-out ${BRIDGE_DUR}ms forwards`;
+    vert.animate(
+      [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }],
+      { duration: VERT_DUR, delay: BRIDGE_DUR, easing: 'ease-out', fill: 'forwards' }
+    );
 
     const drawEnd = BRIDGE_DUR + VERT_DUR;
     run(drawEnd);
@@ -130,7 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
     vert.style.height          = (Math.round(vertH) + 1) + 'px';
     vert.style.transformOrigin = 'bottom center';
     vert.style.transform       = 'scaleY(0)';
-    vert.style.animation       = `vert-draw ${VERT_DUR}ms ease-out forwards`;
+    vert.animate(
+      [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }],
+      { duration: VERT_DUR, easing: 'ease-out', fill: 'forwards' }
+    );
 
     run(VERT_DUR);
     undrawEl(vert, 'vert', VERT_DUR + HORIZ_DUR + 300);
