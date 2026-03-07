@@ -60,10 +60,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const lineY    = lineRect.top + lineRect.height / 2;   // centre of title line
   const btnMidY  = btnRect.top;                          // button top-right corner Y
 
-  // Flash the button's right edge as the launch point
-  activeLink.style.boxShadow = 'inset -2px 0 0 #c08830, inset -4px 0 10px rgba(192,136,48,0.5)';
-  setTimeout(() => { activeLink.style.boxShadow = ''; }, VERT_DUR + 80);
-
   const injected = [];
   function mkLine() {
     const el = document.createElement('div');
@@ -89,6 +85,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       anim.onfinish = () => el.parentNode?.removeChild(el);
     }, startDelay);
   }
+
+  // Animated right-edge indicator on the active button
+  const btnLine = mkLine();
+  btnLine.style.left            = (Math.round(btnRect.right) - 2) + 'px';
+  btnLine.style.top             = (Math.round(btnRect.top)) + 'px';
+  btnLine.style.width           = '2px';
+  btnLine.style.height          = (Math.round(btnRect.height)) + 'px';
+  btnLine.style.transformOrigin = 'top center';
+  btnLine.style.transform       = 'scaleY(0)';
+  btnLine.animate(
+    [{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }],
+    { duration: VERT_DUR, easing: 'ease-out', fill: 'forwards' }
+  );
 
   const bridgeW = Math.round(lineRect.left) - Math.round(btnRect.right);
 
@@ -128,10 +137,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const drawEnd = BRIDGE_DUR + VERT_DUR;
     run(drawEnd);
 
-    // Undraw: bridge first (right-center), then vertical (top-center)
+    // Undraw: bridge first (right-center), then vertical, then button line
     const PAUSE = 300;
-    undrawEl(bridge, 'horiz', drawEnd + HORIZ_DUR + PAUSE);
-    undrawEl(vert,   'vert',  drawEnd + HORIZ_DUR + PAUSE + UNDRAW_DUR);
+    undrawEl(bridge,   'horiz', drawEnd + HORIZ_DUR + PAUSE);
+    undrawEl(vert,     'vert',  drawEnd + HORIZ_DUR + PAUSE + UNDRAW_DUR);
+    undrawEl(btnLine,  'vert',  drawEnd + HORIZ_DUR + PAUSE + UNDRAW_DUR * 2);
 
   } else {
     // ── L-shape: UP (vertical at btn right edge) → RIGHT (title) ──
@@ -151,7 +161,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     );
 
     run(VERT_DUR);
-    undrawEl(vert, 'vert', VERT_DUR + HORIZ_DUR + 300);
+    undrawEl(vert,    'vert', VERT_DUR + HORIZ_DUR + 300);
+    undrawEl(btnLine, 'vert', VERT_DUR + HORIZ_DUR + 300 + UNDRAW_DUR);
   }
 });
 
