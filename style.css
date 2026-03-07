@@ -280,6 +280,8 @@ a:hover { color: var(--link-hover); }
 .project-info { padding-right: 7.5rem; }
 .project-info h4 { font-family: var(--terminal); font-size: 1rem; color: var(--text-alt); margin-bottom: 0.15rem; }
 .project-info p  { font-size: 0.875rem; color: var(--text-white); margin-bottom: 0.3rem; }
+.project-title-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.15rem; }
+.project-title-row h4 { margin-bottom: 0; }
 
 .project-tags-row { display: flex; gap: 0.35rem; flex-wrap: wrap; }
 .tag-sm {
@@ -507,9 +509,7 @@ a:hover { color: var(--link-hover); }
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  position: absolute;
-  bottom: 0.4rem;
-  right: 0.5rem;
+  flex-shrink: 0;
 }
 .game-embed-toggle:hover { color: #fff; text-shadow: 0 0 8px rgba(248,208,96,0.85); border-color: var(--link-hover); }
 
@@ -662,9 +662,8 @@ a:hover { color: var(--link-hover); }
   font-family: var(--terminal); font-size: 0.68rem; color: var(--text-white);
   text-decoration: none; padding: 0.5rem 0.4rem;
   border: 2px outset #8a6028; background: #2a1e0e;
-  letter-spacing: 0.3px; display: block; line-height: 1.4;
-  text-align: center; white-space: nowrap;
-  overflow: hidden; text-overflow: ellipsis;
+  letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center;
+  line-height: 1.4; text-align: center;
   transition: color 0.1s, background 0.1s;
 }
 .side-nav a:hover { background: #3a2814; color: #fff; }
@@ -672,6 +671,12 @@ a:hover { color: var(--link-hover); }
   background: var(--bg-panel); color: var(--text-alt);
   border-style: inset; font-weight: bold;
 }
+.side-nav a[href="selected-portfolio.html"] {
+  color: #40c8d0;
+  text-shadow: 0 0 8px rgba(64,200,208,0.55);
+}
+.side-nav a[href="selected-portfolio.html"]:hover { color: #80e8f0; }
+.side-nav a[href="selected-portfolio.html"].active { color: #40c8d0; text-shadow: 0 0 10px rgba(64,200,208,0.7); }
 
 /* ── Left about panel ── */
 .left-about { padding: 0.85rem 0.85rem 1.5rem; flex: 1; overflow-y: auto; min-height: 0; scrollbar-width: thin; scrollbar-color: var(--border-dark) transparent; }
