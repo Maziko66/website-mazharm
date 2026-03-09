@@ -178,7 +178,8 @@ a:hover { color: var(--link-hover); }
 
 .current-roles { display: flex; flex-direction: column; gap: 0.2rem; margin-top: 0.1rem; }
 .role-row { display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.88rem; }
-.role-company { color: var(--text-alt); }
+.role-company { color: var(--text-alt); text-decoration: none; }
+.role-company:hover { color: var(--link-hover); text-decoration: underline; }
 .role-sep { color: var(--border-light); opacity: 0.6; }
 .role-title { color: var(--text-white); }
 
