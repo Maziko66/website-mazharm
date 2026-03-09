@@ -387,13 +387,18 @@ a:hover { color: var(--link-hover); }
 .tracks-toggle:hover { color: var(--text-alt); border-color: var(--border-light); }
 
 .tracks-list {
-  display: none;
+  overflow: hidden;
+  max-height: 0;
   width: 100%;
   border-top: 1px dashed var(--border-dark);
-  padding-top: 0.45rem;
+  padding-top: 0;
   margin-top: 0.1rem;
+  transition: max-height 320ms linear, padding-top 320ms linear;
 }
-.tracks-list.open { display: block; animation: tab-in 160ms ease forwards; }
+.tracks-list.open {
+  max-height: 1800px;
+  padding-top: 0.45rem;
+}
 
 .track-row {
   display: flex;
@@ -427,6 +432,67 @@ a:hover { color: var(--link-hover); }
 }
 .track-play:hover { color: var(--text-alt); border-color: var(--border-light); background: rgba(240,192,64,0.12); }
 .track-play.playing { color: var(--hot-pink); border-color: var(--hot-pink); background: rgba(216,96,72,0.1); }
+
+/* ── Covers grid ── */
+.cover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.cover-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-dark);
+  background: var(--bg-panel);
+  overflow: hidden;
+  transition: border-color 0.1s;
+}
+.cover-card:hover { border-color: var(--text); }
+.cover-media {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.cover-thumb {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cover-embed {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.cover-embed.open { display: block; }
+.cover-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+.cover-info {
+  padding: 0.45rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+.cover-title {
+  font-family: var(--terminal);
+  font-size: 0.68rem;
+  color: var(--text-white);
+  line-height: 1.4;
+}
+.cover-watch-btn {
+  font-family: var(--terminal);
+  font-size: 0.62rem;
+  color: var(--text-alt);
+  background: none;
+  border: 1px solid var(--border-dark);
+  padding: 0.22rem 0.4rem;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: color 0.1s, border-color 0.1s;
+  align-self: flex-start;
+  margin-top: auto;
+}
+.cover-watch-btn:hover { color: var(--link-hover); border-color: var(--border-light); }
 
 /* ── Track scrubber ───────────────────────────────────────────── */
 .track-scrubber {

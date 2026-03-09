@@ -214,9 +214,55 @@ document.querySelectorAll('.game-embed-toggle').forEach(btn => {
 document.querySelectorAll('.tracks-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
     const list = btn.closest('.music-album').querySelector('.tracks-list');
-    const open = list.classList.toggle('open');
-    btn.textContent = open ? '▼ HIDE TRACKS' : '▶ SHOW TRACKS';
+    const rows = [...list.querySelectorAll('.track-row')];
+    const isOpen = list.classList.contains('open');
+    const staggerOpen  = Math.min(260 / rows.length, 32);
+    const staggerClose = Math.min(180 / rows.length, 25);
+
+    if (!isOpen) {
+      // Set rows invisible before box extends
+      rows.forEach(row => {
+        row.style.opacity   = '0';
+        row.style.transform = 'translateY(4px)';
+        row.style.transition = 'none';
+      });
+      list.classList.add('open');
+      // Stagger rows in while box extends
+      rows.forEach((row, i) => {
+        setTimeout(() => {
+          row.style.transition = 'opacity 140ms ease-out, transform 140ms ease-out';
+          row.style.opacity    = '1';
+          row.style.transform  = 'translateY(0)';
+        }, 30 + i * staggerOpen);
+      });
+      btn.textContent = '▼ HIDE TRACKS';
+    } else {
+      // Stagger rows out in reverse
+      [...rows].reverse().forEach((row, i) => {
+        setTimeout(() => {
+          row.style.transition = 'opacity 110ms ease-in, transform 110ms ease-in';
+          row.style.opacity    = '0';
+          row.style.transform  = 'translateY(4px)';
+        }, i * staggerClose);
+      });
+      // Collapse box at the same time as rows fade out
+      list.classList.remove('open');
+      // Reset row styles only after box has fully closed (320ms = CSS transition)
+      setTimeout(() => {
+        rows.forEach(row => { row.style.cssText = ''; });
+      }, 320);
+      btn.textContent = '▶ SHOW TRACKS';
+    }
   });
+});
+
+// Cover watch — opens YouTube in a new tab (embedding disabled on these videos)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.cover-watch-btn');
+  if (!btn) return;
+  const iframe = btn.closest('.cover-card').querySelector('iframe');
+  const match  = iframe.dataset.src.match(/embed\/([^?]+)/);
+  if (match) window.open('https://www.youtube.com/watch?v=' + match[1], '_blank');
 });
 
 function formatTime(s) {
