@@ -187,14 +187,38 @@ document.querySelectorAll('.about-expand-btn').forEach(btn => {
 });
 
 // ── Tabs ──────────────────────────────────────────────────────
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+  const panel = document.getElementById('tab-' + tabName);
+  if (btn) btn.classList.add('active');
+  if (panel) panel.classList.add('active');
+}
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-  });
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
 });
+
+// ── Hash routing for music albums ─────────────────────────────
+const musicAlbumIds = ['emberbane','clonizer','kingdoms-deck','ship-inc','rentlord',
+  'lost-but-found','mystopia','the-structure','the-calamity','minacious-starfish',
+  'hope','alone-together','cyberhell','dimensional-shift'];
+
+function handleHash() {
+  const hash = location.hash.slice(1);
+  if (!hash) return;
+  if (musicAlbumIds.includes(hash)) {
+    switchTab('music');
+    requestAnimationFrame(() => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', handleHash);
+window.addEventListener('hashchange', handleHash);
 
 document.querySelectorAll('.game-embed-toggle').forEach(btn => {
   btn.addEventListener('click', () => {
