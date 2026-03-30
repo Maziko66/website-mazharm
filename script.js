@@ -210,10 +210,17 @@ function handleHash() {
   if (!hash) return;
   if (musicAlbumIds.includes(hash)) {
     switchTab('music');
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Auto-open tracks if not already open
+      const list = el.querySelector('.tracks-list');
+      const toggleBtn = el.querySelector('.tracks-toggle');
+      if (list && toggleBtn && !list.classList.contains('open')) {
+        toggleBtn.click();
+      }
+    }, 50);
   }
 }
 
