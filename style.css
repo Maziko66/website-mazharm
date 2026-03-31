@@ -52,18 +52,6 @@ body {
   line-height: 1.6;
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent, transparent 2px,
-    rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
-  );
-}
 
 ::selection { background: var(--hot-pink); color: #161410; }
 a { color: var(--link); text-decoration: underline; transition: color 0.1s; }
