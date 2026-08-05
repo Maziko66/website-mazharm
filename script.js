@@ -170,10 +170,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 const menuBtn = document.querySelector('.mobile-menu-btn');
 const leftPanel = document.querySelector('.left-panel');
 if (menuBtn && leftPanel) {
-  menuBtn.addEventListener('click', () => leftPanel.classList.toggle('open'));
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuBtn.addEventListener('click', () => {
+    const open = leftPanel.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
   document.addEventListener('click', (e) => {
-    if (!leftPanel.contains(e.target) && !menuBtn.contains(e.target))
+    if (!leftPanel.contains(e.target) && !menuBtn.contains(e.target)) {
       leftPanel.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
   });
 }
 
@@ -287,15 +293,6 @@ document.querySelectorAll('.tracks-toggle').forEach(btn => {
   });
 });
 
-// Cover watch — opens YouTube in a new tab (embedding disabled on these videos)
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.cover-watch-btn');
-  if (!btn) return;
-  const iframe = btn.closest('.cover-card').querySelector('iframe');
-  const match  = iframe.dataset.src.match(/embed\/([^?]+)/);
-  if (match) window.open('https://www.youtube.com/watch?v=' + match[1], '_blank');
-});
-
 function formatTime(s) {
   if (!isFinite(s) || s < 0) return '0:00';
   const m = Math.floor(s / 60);
@@ -314,10 +311,12 @@ document.querySelectorAll('.track-play').forEach(btn => {
   const title  = row?.querySelector('.track-title');
   if (!title) return;
 
+  btn.setAttribute('aria-label', 'Play / pause: ' + title.textContent);
+
   const scrubber = document.createElement('span');
   scrubber.className = 'track-scrubber';
   scrubber.innerHTML =
-    '<input type="range" class="track-seek" min="0" max="100" value="0" step="0.1">' +
+    '<input type="range" class="track-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek">' +
     '<span class="track-time">0:00/0:00</span>';
   title.insertAdjacentElement('afterend', scrubber);
 
@@ -347,6 +346,7 @@ document.querySelectorAll('.track-play').forEach(btn => {
   }
   seek.addEventListener('mouseup',  commitSeek);
   seek.addEventListener('touchend', commitSeek);
+  seek.addEventListener('change',   commitSeek); // keyboard arrows / drag released off-slider
 });
 
 let currentAudio    = null;
